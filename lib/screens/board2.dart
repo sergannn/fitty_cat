@@ -5,84 +5,109 @@ class SecondScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Fitly',
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 100.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Stack(
+                alignment:
+                    Alignment.bottomCenter, // Align text to bottom center
                 children: [
-                  const Text(
-                    'Fitly',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  const Text(
-                    'Start tracking',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'Track calories easily and take control\n'
-                    'of your health journey. Set goals and\n'
-                    'monitor your progress.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                      height: 1.5,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  const Divider(color: Colors.grey, thickness: 1, height: 20),
-                  const SizedBox(height: 24),
                   SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/board3');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green[800],
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: const Text(
-                        'Get Started For Free',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
+                    height: 480, // Установите желаемую высоту
+                    child: Image.asset(
+                      'assets/images/image.jpg',
+                    ), // Замените на путь к вашему изображению,
                   ),
-                  const SizedBox(height: 16),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Already have an account?',
-                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                  Positioned(
+                    bottom: 320, // Расстояние от нижнего края изображения
+                    child: Text(
+                      'Fitly',
+                      style: TextStyle(
+                        fontFamily: 'Gotham Rounded',
+                        fontSize: 60, // Adjust font size
+                        color: Colors.black, // Make text visible on image
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                   ),
                 ],
               ),
-            ),
+              Container(height: 10),
+              Container(
+                alignment: Alignment.center,
+                child: Text(
+                  'Log your meal',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Gotham Pro',
+                    fontSize: 32,
+                    color: Color(0xFF003E18),
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              Container(height: 5),
+              Container(
+                alignment: Alignment.center,
+                child: Text(
+                  'Quickly add what you eat to stay on track. The more you log, the better your insights.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Gotham',
+                    fontSize: 16,
+                    color: Color(0xFF003E18),
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Container(height: 5),
+              Spacer(),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    debugPrint('Get Started For Free:');
+                    Navigator.pushNamed(context, '/board3');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF003E18),
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                  ),
+                  child: Text(
+                    'Get Started For Free',
+                    style: TextStyle(
+                      fontFamily: 'Gotham',
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFFFFFFF),
+                    ),
+                  ),
+                ),
+              ),
+              Container(height: 10),
+              Container(
+                alignment: Alignment.center,
+                child: Text(
+                  'Already have an account?',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Gotham',
+                    fontSize: 18,
+                    color: Color(0xFF808080),
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Container(height: 10),
+            ],
           ),
         ),
       ),

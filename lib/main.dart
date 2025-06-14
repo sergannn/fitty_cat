@@ -1,3 +1,4 @@
+//import 'package:fit/screens/auth.dart';
 import 'package:fit/screens/auth.dart';
 import 'package:fit/screens/charts.dart';
 import 'package:fit/screens/survey.dart';

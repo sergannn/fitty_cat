@@ -35,5 +35,5 @@ class MainApp extends StatelessWidget {
         '/charts': (context) => ChartsScreen(),
       },
     );
-  }
+  } // привет1
 }

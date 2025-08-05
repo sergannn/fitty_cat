@@ -21,7 +21,7 @@ class _SecondScreenState extends State<SecondScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
+      body: Container(
         child: Column(
           children: [
             Expanded(
@@ -33,27 +33,27 @@ class _SecondScreenState extends State<SecondScreen> {
                   });
                 },
                 children: [
+                     _buildPage(
+                    title: 'Start tracking',
+                    description: 'Monitor your fitness journey with detailed charts and insights to keep you motivated.',
+                    imagePath: 'image2.jpg',
+                  ),
                   _buildPage(
                     title: 'Log your meal',
                     description: 'Quickly add what you eat to stay on track. The more you log, the better your insights.',
-                    imagePath: 'asset/image.jpg',
+                    imagePath: 'image.jpg', // Update with your actual image path
                   ),
-                  _buildPage(
-                    title: 'Track your progress',
-                    description: 'Monitor your fitness journey with detailed charts and insights to keep you motivated.',
-                    imagePath: 'asset/image.jpg',
-                  ),
+               
                   _buildPage(
                     title: 'Personalized plans',
                     description: 'Get customized workout and meal plans tailored to your goals and preferences.',
-                    imagePath: 'asset/image.jpg',
+                    imagePath: 'image3.jpg',
                   ),
                 ],
               ),
             ),
-            _buildDotsIndicator(),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 20.0),
               child: Column(
                 children: [
                   SizedBox(
@@ -66,43 +66,35 @@ class _SecondScreenState extends State<SecondScreen> {
                             curve: Curves.easeInOut,
                           );
                         } else {
-                          debugPrint('Get Started For Free:');
                           Navigator.pushNamed(context, '/auth');
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF003E18),
-                        padding: EdgeInsets.symmetric(vertical: 20),
+                        backgroundColor: const Color(0xFF003E18),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40),
+                          borderRadius: BorderRadius.circular(30),
                         ),
                       ),
                       child: Text(
-                        _currentPage < 2 ? 'Next' : 'Get Started For Free',
-                        style: TextStyle(
-                          fontFamily: 'Gotham',
-                          fontSize: 18,
+                        //_currentPage < 2 ? 'Next' :
+                         'Get Started For Free',
+                        style: const TextStyle(
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFFFFFFFF),
+                          color: Colors.white,
                         ),
                       ),
                     ),
                   ),
-                  Container(height: 10),
-                  Container(
-                    alignment: Alignment.center,
-                    child: Text(
+                  const SizedBox(height: 16),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
                       'Already have an account?',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Gotham',
-                        fontSize: 18,
-                        color: Color(0xFF808080),
-                        fontWeight: FontWeight.w400,
-                      ),
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
                     ),
                   ),
-                  Container(height: 10),
                 ],
               ),
             ),
@@ -113,83 +105,104 @@ class _SecondScreenState extends State<SecondScreen> {
   }
 
   Widget _buildPage({required String title, required String description, required String imagePath}) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 100.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Stack(
-            alignment: Alignment.bottomCenter, // Align text to bottom center
-            children: [
-              SizedBox(
-                height: 480, // Установите желаемую высоту
-                child: Image.asset(
-                  imagePath,
-                ), // Замените на путь к вашему изображению,
+    return Column(
+      children: [
+        // Image with overlay
+        Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            // Full width image
+            Image.asset('assets/images/$imagePath',
+              width: double.infinity,
+              height: 449, // Adjust height as needed
+              fit: BoxFit.cover,
+            ),
+            // Dark overlay for better text visibility
+            Container(
+              height: 449,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.black.withOpacity(0.3),
+                    Colors.transparent,
+                  ],
+                ),
               ),
-              Positioned(
-                bottom: 320, // Расстояние от нижнего края изображения
-                child: Text(
-                  'Fitly',
-                  style: TextStyle(
-                    fontFamily: 'Gotham Rounded',
-                    fontSize: 60, // Adjust font size
-                    color: Colors.black, // Make text visible on image
-                    fontWeight: FontWeight.w800,
-                  ),
+            ),
+            // Fitly text
+            const Positioned(
+              top: 90, // Adjust vertical position
+              left: 0,
+              right: 0,
+              child: Text(
+                'Fitly',
+
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'Gotham',
+                  fontSize: 60,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            // Dots indicator
+            Positioned(
+              bottom: 20,
+              left: 0,
+              right: 0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(3, (index) {
+                  return Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: _currentPage == index 
+                          ? Colors.white 
+                          : Colors.white.withOpacity(0.5),
+                    ),
+                  );
+                }),
+              ),
+            ),
+          ],
+        ),
+        // Content below image
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 24.0),
+          child: Column(
+            children: [
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                description,
+                textAlign: TextAlign.center,
+                style:  TextStyle(
+                  fontFamily: 'gotham',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Color.fromRGBO(0, 62, 24, 1),
+                  height: 1.5,
                 ),
               ),
             ],
           ),
-          Container(height: 10),
-          Container(
-            alignment: Alignment.center,
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: 'Gotham Pro',
-                fontSize: 32,
-                color: Color(0xFF003E18),
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          Container(height: 5),
-          Container(
-            alignment: Alignment.center,
-            child: Text(
-              description,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: 'Gotham',
-                fontSize: 16,
-                color: Color(0xFF003E18),
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-          Container(height: 5),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDotsIndicator() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(3, (index) {
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          margin: const EdgeInsets.symmetric(horizontal: 5.0),
-          height: 10.0,
-          width: _currentPage == index ? 30.0 : 10.0,
-          decoration: BoxDecoration(
-            color: _currentPage == index ? Color(0xFF003E18) : Color(0xFF808080),
-            borderRadius: BorderRadius.circular(5.0),
-          ),
-        );
-      }),
+        ),
+      ],
     );
   }
 }

@@ -15,7 +15,7 @@ class SplashScreen extends StatelessWidget {
       appBar: AppBar(
         toolbarHeight: 200,
         backgroundColor: Colors.transparent,
-        title: const Text('Fifty',style: TextStyle(color: Colors.white,fontSize: 100),)),
+        title: const Text('Fitly',style:  TextStyle(color: Colors.white,fontSize: 150, fontFamily: 'gotham'),)),
       
       body:Container(
         width:MediaQuery.of(context).size.width, 

@@ -21,4 +21,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - asset/image.jpg
+    - assets/images/
+  fonts:
+    - family: Gotham
+      fonts:
+        - asset: assets/fonts/gothamrnd_bold.otf
+          weight: 900
